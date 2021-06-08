@@ -92,7 +92,7 @@ const Farm: React.FC = () => {
           })}
         </Route>
         <Route path={`${path}/history`}>
-          {orderBy(openPools, ['sortOrder']).map((pool) => {
+          {orderBy(finishedPools, ['sortOrder']).map((pool) => {
             if (pool.earningToken === pool.stakingTokenAddress) {
               return <PoolCard key={pool.sousId} pool={pool} />
             }
