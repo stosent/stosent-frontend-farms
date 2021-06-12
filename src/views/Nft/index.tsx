@@ -21,7 +21,7 @@ const Nft = () => {
     <NftProvider>
       <Page>
         <StyledHero>
-          <Heading as="h1" size="xxl" color="secondary" mb="24px">
+          <Heading as="h1" size="xxl" color="secondary" mb="24px" style={{ color: 'orange' }}>
             STOS NFTs
           </Heading>
           <Heading as="h2" size="lg" color="secondary">

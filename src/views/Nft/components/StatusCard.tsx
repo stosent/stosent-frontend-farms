@@ -23,10 +23,10 @@ const StatusCard = () => {
 
   if (!account) {
     return (
-      <Card isActive>
+      <Card isActive style={{ backdropFilter: 'blur(3px)', background: 'rgba(39, 38, 44, 0.8)' }}>
         <CardBody>
           <Heading mb="8px">{TranslateString(999, 'Wallet Disconnected')}</Heading>
-          <Text mb="16px">{TranslateString(999, 'Connect to see if you have won an NFT!')}</Text>
+          <Text mb="16px">{TranslateString(999, 'Connect to see if you have own an NFT!')}</Text>
           <UnlockButton />
         </CardBody>
       </Card>

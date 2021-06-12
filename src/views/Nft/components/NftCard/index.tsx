@@ -159,7 +159,7 @@ const NftCard: React.FC<NftCardProps> = ({ nft }) => {
   )
 
   return (
-    <Card isActive={walletOwnsNft}>
+    <Card isActive={walletOwnsNft} style={{ backdropFilter: 'blur(3px)', background: 'rgba(39, 38, 44, 0.8)' }}>
       <Image src={`/images/nfts/${previewImage}`} alt={name} originalLink={walletOwnsNft ? originalImage : null} />
       <CardBody>
         <Header>

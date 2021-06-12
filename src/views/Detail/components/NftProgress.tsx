@@ -47,7 +47,7 @@ const NftProgress = () => {
   const progress = currentBlock > startBlockNumber ? ((currentBlock - startBlockNumber) / totalBlocks) * 100 : 5
 
   return (
-    <Card>
+    <Card style={{ backdropFilter: 'blur(3px)', background: 'rgba(39, 38, 44, 0.8)' }}>
       <CardBody>
         <ProgressWrap>
           <Progress primaryStep={progress} />

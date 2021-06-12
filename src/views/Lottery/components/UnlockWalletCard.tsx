@@ -26,7 +26,7 @@ const UnlockWalletCard = () => {
   const TranslateString = useI18n()
 
   return (
-    <Card isActive>
+    <Card isActive style={{ backdropFilter: 'blur(3px)', background: 'rgba(39, 38, 44, 0.8)' }}>
       <StyledCardBody>
         <IconWrapper>
           <Ticket />

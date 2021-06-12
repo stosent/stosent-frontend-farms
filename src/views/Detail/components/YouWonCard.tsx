@@ -7,7 +7,7 @@ const YouWonCard = () => {
   const TranslateString = useI18n()
 
   return (
-    <Card isActive>
+    <Card isActive style={{ backdropFilter: 'blur(3px)', background: 'rgba(39, 38, 44, 0.8)' }}>
       <CardBody>
         <CardContent imgSrc="/images/present.svg">
           <Heading mb="8px">{TranslateString(999, 'NFTs Available!')}</Heading>

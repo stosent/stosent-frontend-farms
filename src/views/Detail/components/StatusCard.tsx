@@ -26,7 +26,7 @@ const StatusCard = () => {
       <Card isActive>
         <CardBody>
           <Heading mb="8px">{TranslateString(999, 'Wallet Disconnected')}</Heading>
-          <Text mb="16px">{TranslateString(999, 'Connect to see if you have won an NFT!')}</Text>
+          <Text mb="16px">{TranslateString(999, 'Connect to see if you have own an NFT!')}</Text>
           <UnlockButton />
         </CardBody>
       </Card>

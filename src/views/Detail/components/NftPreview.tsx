@@ -14,7 +14,7 @@ const NftPreview = () => {
       <NftGrid>
         {orderBy(nfts, 'sortOrder').map((nft) => (
           <div key={nft.name}>
-            <Card>
+            <Card style={{ backdropFilter: 'blur(3px)', background: 'rgba(39, 38, 44, 0.8)' }}>
               <Image src={`/images/nfts/${nft.blurImage}`} alt={nft.name} />
               <CardBody>
                 <Heading>{nft.name}</Heading>

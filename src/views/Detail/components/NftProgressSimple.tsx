@@ -9,7 +9,7 @@ const NftProgressSimple = () => {
   const { isInitialized, currentDistributedSupply, totalSupplyDistributed, countBurnt } = useContext(NftProviderContext)
 
   return (
-    <Card>
+    <Card style={{ backdropFilter: 'blur(3px)', background: 'rgba(39, 38, 44, 0.8)' }}>
       <CardBody>
         <InfoRow>
           <Text>{TranslateString(999, "Total NFT's claimed")}:</Text>

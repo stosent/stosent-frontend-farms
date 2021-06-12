@@ -7,6 +7,8 @@ const SecondaryCard = styled.div`
   border-radius: 32px;
   display: flex;
   padding: 24px;
+  backdrop-filter: blur(3px);
+  background: rgba(39, 38, 44, 0.8);
 `
 
 export default SecondaryCard
