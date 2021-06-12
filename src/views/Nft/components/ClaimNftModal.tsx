@@ -3,13 +3,15 @@ import styled from 'styled-components'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import { Button, Modal, Text } from '@pancakeswap-libs/uikit'
 import { getBalanceNumber } from 'utils/formatBalance'
-import { RABBIT_MINTING_FARM_ADDRESS } from 'config/constants/nfts'
+import { NftFarm, AMOUNT_TO_CLAIM } from 'config/constants/nfts'
 import { getCakeAddress } from 'utils/addressHelpers'
 import { Nft } from 'config/constants/types'
 import useTokenBalance from 'hooks/useTokenBalance'
 import useI18n from 'hooks/useI18n'
-import { useRabbitMintingFarm } from 'hooks/useContract'
+import { useERC20, useRabbitMintingFarm } from 'hooks/useContract'
 import InfoRow from './InfoRow'
+import { useNftAllowance } from '../../../hooks/useAllowance'
+import { useNftApprove } from '../../../hooks/useApprove'
 
 interface ClaimNftModalProps {
   nft: Nft
@@ -33,17 +35,25 @@ const Actions = styled.div`
 
 const ClaimNftModal: React.FC<ClaimNftModalProps> = ({ nft, onSuccess, onDismiss }) => {
   const [isLoading, setIsLoading] = useState(false)
+  const [pendingTx, setPendingTx] = useState(false)
   const [error, setError] = useState(null)
   const TranslateString = useI18n()
   const { account } = useWallet()
-  const rabbitMintingContract = useRabbitMintingFarm(RABBIT_MINTING_FARM_ADDRESS)
+  const nftMintingContract = useRabbitMintingFarm(NftFarm)
+  const contraToken = useERC20(getCakeAddress())
+  const allowance = useNftAllowance(contraToken, NftFarm, pendingTx)
+  const onApprove = useNftApprove(contraToken, NftFarm)
   const cakeBalance = useTokenBalance(getCakeAddress())
   const cakeInWallet = getBalanceNumber(cakeBalance)
 
   const handleConfirm = async () => {
+    if (allowance === null) {
+      return
+    }
+
     try {
-      await rabbitMintingContract.methods
-        .mintNFT(nft.bunnyId)
+      await nftMintingContract.methods
+        .mintNFT(nft.nftId)
         .send({ from: account })
         .on('sending', () => {
           setIsLoading(true)
@@ -64,12 +74,12 @@ const ClaimNftModal: React.FC<ClaimNftModalProps> = ({ nft, onSuccess, onDismiss
 
   useEffect(() => {
     if (cakeInWallet === 0) {
-      setError('You must have a CAKE balance greater than zero to claim NFT')
+      setError(`You must have STOS balance to claim NFT`)
     }
   }, [cakeInWallet, setError])
 
   return (
-    <Modal title={TranslateString(999, 'Claim NFT')} onDismiss={onDismiss}>
+    <Modal title={`Claim NFT for ${nft.tokenAmount} STOS`} onDismiss={onDismiss}>
       <ModalContent>
         {error && (
           <Text color="failure" mb="8px">
@@ -82,10 +92,28 @@ const ClaimNftModal: React.FC<ClaimNftModalProps> = ({ nft, onSuccess, onDismiss
         </InfoRow>
       </ModalContent>
       <Actions>
-        <Button fullWidth variant="secondary" onClick={onDismiss}>
-          {TranslateString(462, 'Cancel')}
+        <Button
+          fullWidth
+          disabled={!account || pendingTx || isLoading || allowance > 0}
+          onClick={async () => {
+            try {
+              setPendingTx(true)
+              await onApprove()
+              setPendingTx(false)
+            } catch (e) {
+              setPendingTx(false)
+              console.error(e)
+            }
+          }}
+        >
+          Approve
         </Button>
-        <Button fullWidth onClick={handleConfirm} disabled={!account || isLoading || cakeInWallet <= 0}>
+
+        <Button
+          fullWidth
+          onClick={handleConfirm}
+          disabled={!account || isLoading || cakeInWallet <= 0 || allowance <= 0}
+        >
           {TranslateString(464, 'Confirm')}
         </Button>
       </Actions>

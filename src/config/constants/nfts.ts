@@ -1,53 +1,60 @@
 import { Nft } from './types'
 
-export const RABBIT_MINTING_FARM_ADDRESS = '0x7c8b60d2b859a38c8B9b5B6CB4565485cb637c7a'
-export const PANCAKE_RABBITS_ADDRESS = '0xDf7952B35f24aCF7fC0487D01c8d5690a60DBa07'
+export const NftFarm = '0x100a67934AeD126A85dEDc560cE4574451013d30'
+export const NFT = '0xD6D6D900b7c5F50C5f8ef526842e5f6514d1E5c2'
+export const AMOUNT_TO_CLAIM = '10'
 
 const Nfts: Nft[] = [
   {
-    name: 'Swapsies',
-    description: 'These bunnies love nothing more than swapping pancakes. Especially on BSC.',
-    originalImage: 'https://gateway.pinata.cloud/ipfs/QmXdHqg3nywpNJWDevJQPtkz93vpfoHcZWQovFz2nmtPf5/swapsies.png',
-    previewImage: 'swapsies-preview.png',
+    name: 'Main Pass NFT',
+    metadata: '',
+    description:
+      'All inclusive Main Event Venue DJ Concert. Open Bar. Lottery draw for the afterparty exclusive. Transportation to and from all events from approved hotels.',
+    originalImage: 'https://gateway.pinata.cloud/ipfs/QmaAZXjDP9RaccmbqXBmxh9ByfLdxzgJHdb7mSbKVghzd4',
+    previewImage: 'preview1.png',
     blurImage: 'swapsies-blur.png',
     sortOrder: 999,
-    bunnyId: 0,
+    fileType: 'mp4',
+    nftId: 1,
+    tokenAmount: 10,
+    tokenSupply: 15,
+    nftFarmContract: '0xe876d9A1A8AA778c67bf04fe943677Df84eD99AA',
+    nftContract: '0x1605854923FC0bDC13F0336C06f4fB1c1e6e83eE',
+    active: false,
   },
   {
-    name: 'Drizzle',
-    description: "It's raining syrup on this bunny, but he doesn't seem to mind. Can you blame him?",
-    originalImage: 'https://gateway.pinata.cloud/ipfs/QmXdHqg3nywpNJWDevJQPtkz93vpfoHcZWQovFz2nmtPf5/drizzle.png',
-    previewImage: 'drizzle-preview.png',
+    name: 'Yacht Pass NFT',
+    metadata: '',
+    description:
+      'All inclusive Yacht Party. Fully Catered. Open Bar. Private DJ. Full day Punta Cana booze cruise sightseeing tour. Main Event NFT’s included! (25 STOS Value). Transportation to and from all events',
+    originalImage: 'https://gateway.pinata.cloud/ipfs/Qmd4dPZsBbqpG1dNr4DxkiVyz9wpVQAhUw2cvqshn9e2Na',
+    previewImage: 'preview2.png',
     blurImage: 'drizzle-blur.png',
     sortOrder: 999,
-    bunnyId: 1,
+    fileType: 'mp4',
+    nftId: 0,
+    tokenAmount: 250,
+    tokenSupply: 50,
+    nftFarmContract: '0xe876d9A1A8AA778c67bf04fe943677Df84eD99AA',
+    nftContract: '0x1605854923FC0bDC13F0336C06f4fB1c1e6e83eE',
+    active: true,
   },
   {
-    name: 'Blueberries',
-    description: "These bunnies like their pancakes with blueberries. What's your favorite topping?",
-    originalImage: 'https://gateway.pinata.cloud/ipfs/QmXdHqg3nywpNJWDevJQPtkz93vpfoHcZWQovFz2nmtPf5/blueberries.png',
-    previewImage: 'blueberries-preview.png',
+    name: 'VIP WEEK Pass NFT',
+    metadata: '',
+    description:
+      '5 Bed Villa from a list of oceanfront choices. Personal chef with daily menus. Transportation to and from the events. Yacht Party Admission. Main Event Admission + Afterparty. Party of 8 covered for Villa and all admissions. 4 days, 3 nights (extensions extra)',
+    originalImage: 'https://gateway.pinata.cloud/ipfs/QmdTZT6LS9AULcvwGSYuDS6oBQ7GuHqKWJcSu1ymX3crXV',
+    previewImage: 'preview3.png',
     blurImage: 'blueberries-blur.png',
     sortOrder: 999,
-    bunnyId: 2,
-  },
-  {
-    name: 'Circular',
-    description: "Love makes the world go 'round... but so do pancakes. And these bunnies know it.",
-    originalImage: 'https://gateway.pinata.cloud/ipfs/QmXdHqg3nywpNJWDevJQPtkz93vpfoHcZWQovFz2nmtPf5/circular.png',
-    previewImage: 'circular-preview.png',
-    blurImage: 'circular-blur.png',
-    sortOrder: 999,
-    bunnyId: 3,
-  },
-  {
-    name: 'Sparkle',
-    description: 'It’s sparkling syrup, pancakes, and even lottery tickets! This bunny really loves it.',
-    originalImage: 'https://gateway.pinata.cloud/ipfs/QmXdHqg3nywpNJWDevJQPtkz93vpfoHcZWQovFz2nmtPf5/sparkle.png',
-    previewImage: 'sparkle-preview.png',
-    blurImage: 'sparkle-blur.png',
-    sortOrder: 999,
-    bunnyId: 4,
+    fileType: 'mp4',
+    nftId: 2,
+    tokenAmount: 20,
+    tokenSupply: 5,
+    nftFarmContract: '0xe876d9A1A8AA778c67bf04fe943677Df84eD99AA',
+    nftContract: '0x1605854923FC0bDC13F0336C06f4fB1c1e6e83eE',
+    active: false,
   },
 ]
 

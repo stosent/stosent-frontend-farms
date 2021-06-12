@@ -55,6 +55,11 @@ export const usePancakeRabbits = (address: string) => {
   return useContract(nftAbi, address)
 }
 
+export const useNFTFarmContract = (address: string) => {
+  const nftFarmAbi = (nftFarm as unknown) as AbiItem
+  return useContract(nftFarmAbi, address)
+}
+
 export const useLottery = () => {
   const abi = (lottery as unknown) as AbiItem
   return useContract(abi, getLotteryAddress())

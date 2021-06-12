@@ -7,6 +7,7 @@ import useTheme from 'hooks/useTheme'
 import { useSTOSPrice } from 'state/hooks'
 import { Menu as UikitMenu } from '@pancakeswap-libs/uikit'
 import config from './config'
+import 'antd/dist/antd.css'
 import './style.css'
 
 const Menu = (props) => {
