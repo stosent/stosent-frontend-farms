@@ -82,9 +82,9 @@ const config: MenuEntry[] = [
     ],
   },
   {
-    label: 'Audits Coming Soon',
+    label: 'Gordian Audit Passed',
     icon: 'AuditIcon',
-    href: '#',
+    href: 'https://gordian.agency/',
   },
 ]
 
