@@ -73,10 +73,10 @@ const ClaimNftModal: React.FC<ClaimNftModalProps> = ({ nft, onSuccess, onDismiss
   }
 
   useEffect(() => {
-    if (cakeInWallet === nft.tokenAmount) {
+    if (cakeInWallet <= nft.tokenAmount) {
       setError(`You must have STOS balance to claim NFT`)
     }
-  }, [cakeInWallet, setError])
+  }, [nft, cakeInWallet, setError])
 
   return (
     <Modal title={`Claim NFT for ${nft.tokenAmount} STOS`} onDismiss={onDismiss}>
