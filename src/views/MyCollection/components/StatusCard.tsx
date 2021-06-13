@@ -41,6 +41,10 @@ const StatusCard = () => {
     return <YouWonCard />
   }
 
+  if (hasClaimed.length === 0) {
+    return <YouWonCard />
+  }
+
   if (hasClaimed.length === 1 && hasClaimed[0] === 0) {
     return <YouWonCard />
   }

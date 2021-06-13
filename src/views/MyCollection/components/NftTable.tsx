@@ -60,13 +60,13 @@ const NftTable = () => {
 
   const handleApprove = useCallback(
     async (tokenId) => {
-      console.log('tokenId', tokenId)
+      // console.log('tokenId', tokenId)
       try {
         setState((prevState) => ({ ...prevState, isLoading: true }))
         setRequestedApproval(true)
-        console.log('onApprove', tokenId)
+        // console.log('onApprove', tokenId)
 
-        console.log('nftContract', nftContract, NftFarm, tokenId)
+        // console.log('nftContract', nftContract, NftFarm, tokenId)
         await nftContract.methods
           .approve(NftFarm, tokenId)
           .send({ from: account })

@@ -1,9 +1,9 @@
 {
-    "name": "Yacht Pass NFT",
-    "description": "All inclusive Yacht Party. Fully Catered. Open Bar. Private DJ. Full day Punta Cana booze cruise sightseeing tour. Main Event NFT’s included! (25 STOS Value). Transportation to and from all events",
-    "image": "https://gateway.pinata.cloud/ipfs/Qmd4dPZsBbqpG1dNr4DxkiVyz9wpVQAhUw2cvqshn9e2Na",
-    "file_type": "mp4",
-    "base_price": 10,
-    "total_supply": 20,
-    "price_multiplier": 1016282
+  "name": "Main Pass NFT",
+  "description": "All inclusive Main Event Venue DJ Concert. Open Bar. Lottery draw for the afterparty exclusive. Transportation to and from all events from approved hotels.",
+  "image": "https://gateway.pinata.cloud/ipfs/QmaAZXjDP9RaccmbqXBmxh9ByfLdxzgJHdb7mSbKVghzd4",
+  "file_type": "mp4",
+  "base_price": 350,
+  "total_supply": 30,
+  "price_multiplier": 1016282
 }
