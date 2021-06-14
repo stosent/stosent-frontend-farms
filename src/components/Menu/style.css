@@ -5,3 +5,8 @@ nav ~ div > div:nth-child(2) {
     background-position: center;
     background-repeat: no-repeat;
 }
+
+.ant-table {
+    backdrop-filter: blur(3px);
+    background: rgb(255 255 255 / 50%);
+}

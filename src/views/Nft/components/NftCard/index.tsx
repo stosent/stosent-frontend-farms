@@ -212,7 +212,7 @@ const NftCard: React.FC<NftCardProps> = ({ nft }) => {
         )}
       </CardBody>
       <CardFooter p="0">
-        {isInitialized && active && (
+        {isInitialized && (
           <DetailsButton endIcon={<Icon width="24px" color="primary" />} onClick={handleClick}>
             {state.isLoading ? TranslateString(999, 'Loading...') : TranslateString(999, 'Details')}
           </DetailsButton>
@@ -228,16 +228,20 @@ const NftCard: React.FC<NftCardProps> = ({ nft }) => {
                 </Text>
               )}
             />
-            <InfoRow>
-              <Text>{TranslateString(999, 'Number minted')}:</Text>
-              <Value>
-                {MINTED}/{tokenSupply}
-              </Value>
-            </InfoRow>
-            <InfoRow>
-              <Text>{TranslateString(999, 'Owned By Me')}:</Text>
-              <Value>{MINTS}</Value>
-            </InfoRow>
+            {active && (
+              <InfoRow>
+                <Text>{TranslateString(999, 'Number minted')}:</Text>
+                <Value>
+                  {MINTED}/{tokenSupply}
+                </Value>
+              </InfoRow>
+            )}
+            {active && (
+              <InfoRow>
+                <Text>{TranslateString(999, 'Owned By Me')}:</Text>
+                <Value>{MINTS}</Value>
+              </InfoRow>
+            )}
           </InfoBlock>
         )}
       </CardFooter>

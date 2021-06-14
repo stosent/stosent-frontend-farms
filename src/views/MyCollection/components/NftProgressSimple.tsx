@@ -9,7 +9,7 @@ const NftProgressSimple = () => {
   const { balanceOf } = useContext(NftProviderContext)
 
   return (
-    <Card>
+    <Card style={{ backdropFilter: 'blur(3px)', background: 'rgba(39, 38, 44, 0.8)' }}>
       <CardBody>
         <InfoRow>
           <Text>{TranslateString(999, 'My Ticket NFTs')}:</Text>

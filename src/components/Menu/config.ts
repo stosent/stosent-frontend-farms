@@ -36,7 +36,7 @@ const config: MenuEntry[] = [
   //   href: '/lottery',
   // },
   {
-    label: 'NFT',
+    label: 'Mint Ticket NFTs',
     icon: 'NftIcon',
     href: '/nft',
   },
