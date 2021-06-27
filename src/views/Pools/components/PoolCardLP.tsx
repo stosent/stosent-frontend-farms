@@ -56,7 +56,6 @@ const PoolCard: React.FC<HarvestProps> = ({ pool }) => {
   const stakingTokenContract = useERC20(stakingTokenAddress)
   const lpTokenContract = useLP(stakingTokenAddress)
 
-  const [apy, setAPY] = useState(new BigNumber(0))
 
   const [liquidity, setLiquidity] = useState(new BigNumber(0))
   const [totalSupply, setTotalSupply] = useState(new BigNumber(0))
@@ -160,7 +159,7 @@ const PoolCard: React.FC<HarvestProps> = ({ pool }) => {
     }
   }, [lpTokenContract, stakingTokenAddress])
 
-  React.useEffect(() => {
+  const getApr = useCallback(() => {
     const baseValue = new BigNumber(token0price).times(reserve0)
     const quoteValue = new BigNumber(token1price).times(reserve1)
 
@@ -173,18 +172,11 @@ const PoolCard: React.FC<HarvestProps> = ({ pool }) => {
       getBalanceNumber(pool.totalStaked, pool.tokenDecimals),
       parseFloat(pool.tokenPerBlock),
     )
-    setAPY(new BigNumber(apr))
-  }, [
-    pool.tokenDecimals,
-    pool.tokenPerBlock,
-    pool.totalStaked,
-    reserve0,
-    reserve1,
-    rewardTokenPrice,
-    token0price,
-    token1price,
-    totalSupply,
-  ])
+    return new BigNumber(apr);
+ 
+}, [pool.tokenDecimals, pool.tokenPerBlock, pool.totalStaked, reserve0, reserve1, rewardTokenPrice, token0price, token1price, totalSupply])
+
+const apy = getApr();
 
   return (
     <Card
