@@ -54,10 +54,12 @@ const PrizesWonContent: React.FC = () => {
       if (txHash) {
         setRequestedClaim(false)
       }
+      window.location.reload();
     } catch (e) {
       console.error(e)
     }
   }, [onMultiClaim, setRequestedClaim])
+
 
   const winnings = getBalanceNumber(claimAmount).toFixed(2)
 
@@ -77,7 +79,7 @@ const PrizesWonContent: React.FC = () => {
               {winnings}
             </Heading>
             <Heading as="h4" size="lg">
-              CAKE
+              STOS
             </Heading>
           </WinningsWrapper>
         </>

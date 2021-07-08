@@ -11,8 +11,6 @@ const StyledCard = styled(Card)`
     props.isDisabled
       ? `  
         margin-top: 16px;
-        background-color: unset;
-        box-shadow: unset;
         border: 1px solid ${props.theme.colors.textDisabled};
 
         ${props.theme.mediaQueries.sm} {

@@ -42,10 +42,8 @@ const UserTicketsModal: React.FC<UserTicketsModalProps> = ({ myTicketNumbers, on
   })
 
   return (
-    <Modal title={TranslateString(490, `My Tickets (Total: ${myTicketNumbers.length})`)} onDismiss={onDismiss}>
-      <TicketsList>
-        <h2>{listItems}</h2>
-      </TicketsList>
+    <Modal title={`My Tickets (Total: ${myTicketNumbers.length})`} onDismiss={onDismiss}>
+      <TicketsList>{listItems}</TicketsList>
       <StyledButton variant="secondary" onClick={onDismiss}>
         {TranslateString(438, 'Close')}
       </StyledButton>
@@ -58,6 +56,7 @@ const RewardP = styled.div`
 `
 
 const TicketsList = styled.div`
+  font-size: 25px;
   text-align: center;
   overflow-y: auto;
   max-height: 400px;

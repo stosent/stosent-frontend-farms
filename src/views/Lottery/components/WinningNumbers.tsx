@@ -100,9 +100,9 @@ const WinningNumbers: React.FC = () => {
                 </CenteredTextWithPadding>
               </RowNoPadding>
             </Column>
-            <Link href="https://api.pancakeswap.com/api/lottery?page=0&pageSize=25" target="_blank">
+            {/* <Link href="https://api.pancakeswap.com/api/lottery?page=0&pageSize=25" target="_blank">
               {TranslateString(448, 'Export recent winning numbers')}
-            </Link>
+            </Link> */}
           </StyledCardContentInner>
         </CardBody>
       </Card>

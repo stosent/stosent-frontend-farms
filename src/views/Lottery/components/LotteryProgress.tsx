@@ -39,7 +39,7 @@ const LotteryProgress = () => {
   const lotteryHasDrawn = useGetLotteryHasDrawn()
   const currentMillis = useCurrentTime()
   const timeUntilTicketSale = getTicketSaleTime(currentMillis)
-  const timeUntilLotteryDraw = getLotteryDrawTime(currentMillis)
+  const timeUntilLotteryDraw = getLotteryDrawTime()
 
   return (
     <ProgressWrapper>
