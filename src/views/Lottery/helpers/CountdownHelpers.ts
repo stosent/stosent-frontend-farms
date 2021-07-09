@@ -6,7 +6,32 @@ let curday
 let secTime
 let ticker
 
-const getSeconds = () => {
+const getDrawSeconds = () => {
+  const dt = new Date();
+  dt.setTime(dt.getTime()+dt.getTimezoneOffset()*60*1000);
+  const offset = -300; // Timezone offset for EST in minutes.
+  const nowDate = new Date(dt.getTime() + offset*60*1000)
+  const dy = 6 // Sunday through Saturday, 0 to 6
+  const countertime = new Date(nowDate.getFullYear(), nowDate.getMonth(), nowDate.getDate(), 13, 0, 0) // 13 out of 24 hours = 1pm
+
+  const curtime = nowDate.getTime() // current time
+  const atime = countertime.getTime() // countdown time
+  let diff = (atime - curtime) / 1000
+  if (diff > 0) {
+    curday = dy - nowDate.getDay()
+  } else {
+    curday = dy - nowDate.getDay() - 1
+  } // after countdown time
+  if (curday < 0) {
+    curday += 7
+  } // already after countdown time, switch to next week
+  if (diff <= 0) {
+    diff += 86400 * 7
+  }
+  startDrawTimer(diff)
+}
+
+const getSalesSeconds = () => {
   const dt = new Date();
   dt.setTime(dt.getTime()+dt.getTimezoneOffset()*60*1000);
   const offset = -300; // Timezone offset for EST in minutes.
@@ -28,29 +53,57 @@ const getSeconds = () => {
   if (diff <= 0) {
     diff += 86400 * 7
   }
-  startTimer(diff)
+  startSalesTimer(diff)
 }
 
-const startTimer = (secs) => {
+const startDrawTimer = (secs) => {
   secTime = parseInt(secs)
   ticker = setInterval(() => {
-    tick()
+    drawTick()
   }, 1000)
-  tick() // initial count display
+  drawTick() // initial count display
 }
 
-const tick = () => {
+const drawTick = () => {
   let secs = secTime
   if (secs > 0) {
     secTime--
   } else {
     clearInterval(ticker)
-    getSeconds() // start over
+    getDrawSeconds() // start over
   }
 
   const days = Math.floor(secs / 86400)
   secs %= 86400
   const hours = Math.floor(secs / 3600)
+  secs %= 3600
+  const mins = Math.floor(secs / 60)
+  secs %= 60
+
+
+  return { days: curday, hours, mins }
+}
+
+const startSalesTimer = (secs) => {
+  secTime = parseInt(secs)
+  ticker = setInterval(() => {
+    salesTick()
+  }, 1000)
+  salesTick() // initial count display
+}
+
+const salesTick = () => {
+  let secs = secTime
+  if (secs > 0) {
+    secTime--
+  } else {
+    clearInterval(ticker)
+    getSalesSeconds() // start over
+  }
+
+  const days = Math.floor(secs / 86400)
+  secs %= 86400
+  const hours = Math.floor(secs / 3600) - 1
   secs %= 3600
   const mins = Math.floor(secs / 60)
   secs %= 60
@@ -100,16 +153,13 @@ const getNextTicketSaleTime = (currentMillis) => (parseInt(currentMillis / 36000
 const hoursAndMinutesString = (hours, minutes) => `${parseInt(hours)}h, ${parseInt(minutes)}m`
 const daysHoursAndMinutesString = (days, hours, mins) => `${parseInt(days)}d, ${parseInt(hours)}h, ${parseInt(mins)}m`
 
-export const getTicketSaleTime = (currentMillis): string => {
-  const nextTicketSaleTime = getNextTicketSaleTime(currentMillis)
-  const msUntilNextTicketSale = nextTicketSaleTime - currentMillis
-  const { minutes } = getTimePeriods(msUntilNextTicketSale / 1000)
-  const { hours } = getTimePeriods(msUntilNextTicketSale / 1000)
-  return hoursAndMinutesString(hours, minutes)
+export const getTicketSaleTime = (): string => {
+  const { days, hours, mins } = salesTick()
+  return daysHoursAndMinutesString(days, hours, mins)
 }
 
 export const getLotteryDrawTime = (): string => {
-  const { days, hours, mins } = tick()
+  const { days, hours, mins } = drawTick()
   return daysHoursAndMinutesString(days, hours, mins)
 }
 
