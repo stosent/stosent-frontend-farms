@@ -6,12 +6,16 @@ let curday
 let secTime
 let ticker
 
+let curdaySales
+let secTimeSales
+let tickerSales
+
 const getDrawSeconds = () => {
   const dt = new Date();
   dt.setTime(dt.getTime()+dt.getTimezoneOffset()*60*1000);
   const offset = -300; // Timezone offset for EST in minutes.
   const nowDate = new Date(dt.getTime() + offset*60*1000)
-  const dy = 6 // Sunday through Saturday, 0 to 6
+  const dy = 13 // Sunday through Saturday, 0 to 6
   const countertime = new Date(nowDate.getFullYear(), nowDate.getMonth(), nowDate.getDate(), 13, 0, 0) // 13 out of 24 hours = 1pm
 
   const curtime = nowDate.getTime() // current time
@@ -43,12 +47,12 @@ const getSalesSeconds = () => {
   const atime = countertime.getTime() // countdown time
   let diff = (atime - curtime) / 1000
   if (diff > 0) {
-    curday = dy - nowDate.getDay()
+    curdaySales = dy - nowDate.getDay()
   } else {
-    curday = dy - nowDate.getDay() - 1
+    curdaySales = dy - nowDate.getDay() - 1
   } // after countdown time
-  if (curday < 0) {
-    curday += 7
+  if (curdaySales < 0) {
+    curdaySales += 7
   } // already after countdown time, switch to next week
   if (diff <= 0) {
     diff += 86400 * 7
@@ -65,6 +69,7 @@ const startDrawTimer = (secs) => {
 }
 
 const drawTick = () => {
+
   let secs = secTime
   if (secs > 0) {
     secTime--
@@ -85,19 +90,19 @@ const drawTick = () => {
 }
 
 const startSalesTimer = (secs) => {
-  secTime = parseInt(secs)
-  ticker = setInterval(() => {
+  secTimeSales = parseInt(secs)
+  tickerSales = setInterval(() => {
     salesTick()
   }, 1000)
   salesTick() // initial count display
 }
 
 const salesTick = () => {
-  let secs = secTime
+  let secs = secTimeSales
   if (secs > 0) {
-    secTime--
+    secTimeSales--
   } else {
-    clearInterval(ticker)
+    clearInterval(tickerSales)
     getSalesSeconds() // start over
   }
 
@@ -109,9 +114,9 @@ const salesTick = () => {
   secs %= 60
 
 
-  return { days: curday, hours, mins }
+  return { days: curdaySales, hours, mins }
 }
-/* New weekly countdown helper, starts every Wednesday 8PM :: Ends Here */
+/* New weekly countdown helper :: Ends Here */
 
 // lottery draws UTC: 02:00 (10:00 SGT), 14:00 (22:00 SGT)
 const lotteryDrawHoursUtc = [2, 14]
