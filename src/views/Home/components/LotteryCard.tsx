@@ -64,7 +64,7 @@ const FarmedStakingCard = () => {
   const [onPresentBuy] = useModal(<BuyModal max={cakeBalance} tokenName="STOS" />)
 
   return (
-    <StyledLotteryCard>
+    <StyledLotteryCard style={{ backdropFilter: 'blur(3px)', background: 'rgba(39, 38, 44, 0.8)' }}>
       <CardBody>
         <Heading size="xl" mb="24px">
           {TranslateString(550, 'Your Lottery Winnings')}

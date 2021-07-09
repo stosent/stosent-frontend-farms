@@ -31,7 +31,7 @@ const YourPrizesCard: React.FC = () => {
   const isAWin = winnings > 0
 
   return (
-    <StyledCard isDisabled={!isAWin} isActive={isAWin}>
+    <StyledCard isDisabled={!isAWin} isActive={isAWin} style={{ backdropFilter: 'blur(3px)', background: 'rgba(39, 38, 44, 0.8)' }}>
       <CardBody>{isAWin ? <PrizesWonContent /> : <NoPrizesContent />}</CardBody>
     </StyledCard>
   )

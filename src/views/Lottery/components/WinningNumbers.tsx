@@ -17,7 +17,7 @@ const WinningNumbers: React.FC = () => {
 
   return (
     <CardWrapper>
-      <Card>
+      <Card style={{ backdropFilter: 'blur(3px)', background: 'rgba(39, 38, 44, 0.8)' }}>
         <CardBody>
           <StyledCardContentInner>
             <StyledCardHeader>
