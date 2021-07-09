@@ -41,7 +41,7 @@ const getSalesSeconds = () => {
   const offset = -300; // Timezone offset for EST in minutes.
   const nowDate = new Date(dt.getTime() + offset*60*1000)
   const dy = 13 // Sunday through Saturday, 0 to 6
-  const countertime = new Date(nowDate.getFullYear(), nowDate.getMonth(), nowDate.getDate(), 12, 0, 0) // 13 out of 24 hours = 1pm
+  const countertime = new Date(nowDate.getFullYear(), nowDate.getMonth(), nowDate.getDate(), 13, 0, 0) // 13 out of 24 hours = 1pm
 
   const curtime = nowDate.getTime() // current time
   const atime = countertime.getTime() // countdown time
@@ -108,7 +108,7 @@ const salesTick = () => {
 
   const days = Math.floor(secs / 86400)
   secs %= 86400
-  const hours = Math.floor(secs / 3600) - 1
+  const hours = Math.floor(secs / 3600)
   secs %= 3600
   const mins = Math.floor(secs / 60)
   secs %= 60
