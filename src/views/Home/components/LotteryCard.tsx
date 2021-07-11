@@ -5,12 +5,15 @@ import { getCakeAddress } from 'utils/addressHelpers'
 import { getBalanceNumber } from 'utils/formatBalance'
 import useI18n from 'hooks/useI18n'
 import useGetLotteryHasDrawn from 'hooks/useGetLotteryHasDrawn'
+import { useLotteryAllowance } from 'hooks/useAllowance'
+import { useLotteryApprove } from 'hooks/useApprove'
 import useTokenBalance from 'hooks/useTokenBalance'
 import { useMultiClaimLottery } from 'hooks/useBuyLottery'
 import { useTotalClaim } from 'hooks/useTickets'
 import BuyModal from 'views/Lottery/components/TicketCard/BuyTicketModal'
 import CakeWinnings from './CakeWinnings'
 import LotteryJackpot from './LotteryJackpot'
+import PurchaseWarningModal from './PurchaseWarningModal'
 
 const StyledLotteryCard = styled(Card)`
   background-image: url('/images/ticket-bg.svg');
@@ -41,12 +44,17 @@ const Actions = styled.div`
 `
 
 const FarmedStakingCard = () => {
+  const [requestedApproval, setRequestedApproval] = useState(false)
   const lotteryHasDrawn = useGetLotteryHasDrawn()
   const [requesteClaim, setRequestedClaim] = useState(false)
   const TranslateString = useI18n()
   const { claimAmount } = useTotalClaim()
+  const { onApprove } = useLotteryApprove()
   const { onMultiClaim } = useMultiClaimLottery()
+  const allowance = useLotteryAllowance()
   const cakeBalance = useTokenBalance(getCakeAddress())
+  const [onPresentApprove] = useModal(<PurchaseWarningModal />)
+
 
   const handleClaim = useCallback(async () => {
     try {
@@ -61,10 +69,39 @@ const FarmedStakingCard = () => {
     }
   }, [onMultiClaim, setRequestedClaim])
 
-  const [onPresentBuy] = useModal(<BuyModal max={cakeBalance} tokenName="CAKE" />)
+  const handleApprove = useCallback(async () => {
+    try {
+      setRequestedApproval(true)
+      const txHash = await onApprove()
+      // user rejected tx or didn't go thru
+      if (!txHash) {
+        setRequestedApproval(false)
+      }
+      onPresentApprove()
+    } catch (e) {
+      console.error(e)
+    }
+  }, [onApprove, onPresentApprove])
+
+  const renderLotteryTicketButtons = () => {
+    if (!allowance.toNumber()) {
+      return (
+        <Button fullWidth disabled={requestedApproval} onClick={handleApprove}>
+          {TranslateString(999, 'Approve STOS')}
+        </Button>
+      )
+    }
+    return (
+      <Button id="dashboard-buy-tickets" variant="secondary" onClick={onPresentBuy} disabled={lotteryHasDrawn}>
+        {TranslateString(558, 'Buy Tickets')}
+      </Button>
+    )
+  }
+
+  const [onPresentBuy] = useModal(<BuyModal max={cakeBalance} tokenName="STOS" />)
 
   return (
-    <StyledLotteryCard>
+    <StyledLotteryCard style={{ backdropFilter: 'blur(3px)', background: 'rgba(39, 38, 44, 0.8)' }}>
       <CardBody>
         <Heading size="xl" mb="24px">
           {TranslateString(550, 'Your Lottery Winnings')}
@@ -72,7 +109,7 @@ const FarmedStakingCard = () => {
         <CardImage src="/images/ticket.svg" alt="cake logo" width={64} height={64} />
         <Block>
           <CakeWinnings />
-          <Label>{TranslateString(552, 'CAKE to Collect')}</Label>
+          <Label>{TranslateString(552, 'STOS to Collect')}</Label>
         </Block>
         <Block>
           <LotteryJackpot />
@@ -87,9 +124,10 @@ const FarmedStakingCard = () => {
           >
             {TranslateString(556, 'Collect Winnings')}
           </Button>
-          <Button id="dashboard-buy-tickets" variant="secondary" onClick={onPresentBuy} disabled={lotteryHasDrawn}>
+          {renderLotteryTicketButtons()}
+          {/* <Button id="dashboard-buy-tickets" variant="secondary" onClick={onPresentBuy} disabled={lotteryHasDrawn}>
             {TranslateString(558, 'Buy Tickets')}
-          </Button>
+          </Button> */}
         </Actions>
       </CardBody>
     </StyledLotteryCard>

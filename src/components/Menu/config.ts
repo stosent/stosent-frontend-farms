@@ -30,13 +30,13 @@ const config: MenuEntry[] = [
     icon: 'PoolIcon',
     href: '/pools',
   },
-  // {
-  //   label: 'Lottery',
-  //   icon: 'TicketIcon',
-  //   href: '/lottery',
-  // },
   {
-    label: 'Mint Ticket NFTs',
+    label: 'Lottery',
+    icon: 'TicketIcon',
+    href: '/lottery',
+  },
+  {
+    label: 'NFT',
     icon: 'NftIcon',
     href: '/nft',
   },

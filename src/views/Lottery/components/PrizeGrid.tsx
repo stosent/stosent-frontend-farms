@@ -103,7 +103,7 @@ const PrizeGrid: React.FC<PrizeGridProps> = ({
       </GridItem>
       {/* Burn row */}
       <GridItem marginBottom="0">
-        <Text>{TranslateString(999, `${pastDraw ? 'Burned' : 'To burn'}`)}:</Text>
+        <Text>{TranslateString(999, `${pastDraw ? 'Burned' : 'To admin'}`)}:</Text>
       </GridItem>
       {pastDraw ? (
         <>

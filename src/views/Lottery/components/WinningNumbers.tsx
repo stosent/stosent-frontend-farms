@@ -17,7 +17,7 @@ const WinningNumbers: React.FC = () => {
 
   return (
     <CardWrapper>
-      <Card>
+      <Card style={{ backdropFilter: 'blur(3px)', background: 'rgba(39, 38, 44, 0.8)' }}>
         <CardBody>
           <StyledCardContentInner>
             <StyledCardHeader>
@@ -100,9 +100,9 @@ const WinningNumbers: React.FC = () => {
                 </CenteredTextWithPadding>
               </RowNoPadding>
             </Column>
-            <Link href="https://api.pancakeswap.com/api/lottery?page=0&pageSize=25" target="_blank">
+            {/* <Link href="https://api.pancakeswap.com/api/lottery?page=0&pageSize=25" target="_blank">
               {TranslateString(448, 'Export recent winning numbers')}
-            </Link>
+            </Link> */}
           </StyledCardContentInner>
         </CardBody>
       </Card>
