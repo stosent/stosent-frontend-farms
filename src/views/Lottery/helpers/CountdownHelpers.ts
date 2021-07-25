@@ -15,7 +15,7 @@ const getDrawSeconds = () => {
   dt.setTime(dt.getTime()+dt.getTimezoneOffset()*60*1000);
   const offset = -300; // Timezone offset for EST in minutes.
   const nowDate = new Date(dt.getTime() + offset*60*1000)
-  const dy = 6 // Sunday through Saturday, 0 to 6
+  const dy = 0 // Sunday through Saturday, 0 to 6
   const countertime = new Date(nowDate.getFullYear(), nowDate.getMonth(), nowDate.getDate(), 13, 0, 0) // 13 out of 24 hours = 1pm
 
   const curtime = nowDate.getTime() // current time
@@ -40,7 +40,7 @@ const getSalesSeconds = () => {
   dt.setTime(dt.getTime()+dt.getTimezoneOffset()*60*1000);
   const offset = -300; // Timezone offset for EST in minutes.
   const nowDate = new Date(dt.getTime() + offset*60*1000)
-  const dy = 6 // Sunday through Saturday, 0 to 6
+  const dy = 0 // Sunday through Saturday, 0 to 6
   const countertime = new Date(nowDate.getFullYear(), nowDate.getMonth(), nowDate.getDate(), 12, 0, 0) // 13 out of 24 hours = 1pm
 
   const curtime = nowDate.getTime() // current time
